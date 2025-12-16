@@ -1,71 +1,109 @@
-{% extends "halaman/base.html" %}
+{% extends 'halaman/base.html' %}
 {% load static %}
 
 {% block content %}
-    <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('{% static 'halaman/assets/img/bg9.jpg' %}');">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h1 class="title">Contact US</h1>
-                        <h4>Meet the amazing team behind this project and find out more about how we work.</h4>
-                </div>
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('{% static 'halaman/assets/img/backgraound04.jpg' %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h1 class="title">Contact Us</h1>
+                    
             </div>
         </div>
     </div>
-    <div class="main main-raised">
-		<div class="contact-content">
-    		<div class="container">
-            	<h2 class="title">Send us a message</h2>
-				<div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="col-md-4">
-                            <div class="info info-horizontal">
-                                <div class="icon icon-primary">
-                                    <i class="material-icons">pin_drop</i>
-                                </div>
-                                <div class="description">
-                                    <h4 class="info-title">Find us at the office</h4>
-                                    <p> Bld Mihail Kogalniceanu, nr. 8,<br>
-                                        7652 Bucharest,<br>
-                                        Romania
-                                    </p>
+</div>
+
+<div class="main main-raised">
+    <div class="contact-content">
+        <div class="container">
+            <h2 class="title">Send us a message</h2>
+
+            <!-- Tempat untuk menampilkan pesan -->
+            {% if messages %}
+            <div class="alert alert-info" role="alert">
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <form action="{% url 'submit_contact' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Nama:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan:</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Kirim Pesan</button>
+                </form>
+                <dif class="col-12 col-md-12">
+                    <div class="col-md-4">
+                        <div class="info info-horizontal">
+                            <div class="icon icon-danger">
+                                <i class="material-icons">pin_drop</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Find us at the office</h4>
+                                <p> Jl. Jend. Sudirman No.22, Bugis, Kec. Samarinda Kota, Kota Samarinda,75111<br>
+                                    Kalimantan Timur.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info info-horizontal">
+                            <div class="icon icon-default">
+                                <i class="material-icons">phone</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Give us a ring</h4>
+                                <p> Administrasi<br>
+                                    0541736850<br>
+                                    Mon - Fri, 07:30-16:00
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info info-horizontal">
+                            <div class="icon icon-info">
+                                <i class="material-icons">business_center</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Social Media</h4>
+                                <div class="row"> <!-- Baris baru untuk tombol -->
+                                    <div class="col-xs-12" style="padding-bottom: 10px;"> <!-- Ubah menjadi col-xs-12 dan tambahkan padding -->
+                                        <a href="https://wa.me/yourphonenumber" class="btn btn-simple btn-whatsapp" style="text-align: left; padding-left: 0;">
+                                            <i class="fa fa-whatsapp" style="margin-right: 10px; vertical-align: middle;"></i> WhatsApp
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12" style="margin-top: -10px;"> <!-- Tambahkan margin-top negatif untuk menaikkan tombol -->
+                                        <a href="mailto:youremail@example.com" class="btn btn-simple btn-email" style="text-align: left; padding-left: 0;">
+                                            <i class="fa fa-envelope" style="margin-right: 10px; vertical-align: middle;"></i> Email
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>   
-
-                        <div class="col-md-4">
-                            <div class="info info-horizontal">
-                                <div class="icon icon-primary">
-                                    <i class="material-icons">phone</i>
-                                </div>
-                                <div class="description">
-                                    <h4 class="info-title">Give us a ring</h4>
-                                    <p> 
-                                        Michael Jordan<br>
-                                        +40 762 321 762<br>
-                                        Mon - Fri, 8:00-22:00
-                                    </p>
-                                </div>
-                            </div> 
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="info info-horizontal">
-                                <div class="icon icon-primary">
-                                    <i class="material-icons">business_center</i>
-                                </div>
-                                <div class="description">
-                                    <h4 class="info-title">Legal Information</h4>
-                                    <p> Creative Tim Ltd.<br>
-                                        VAT &middot; EN2341241<br>
-                                        IBAN &middot; EN8732ENGB2300099123<br>
-                                        Bank &middot; Great Britain Bank
-                                    </p>
-                                </div>
-                            </div> 
                         </div>
                     </div>
+                <div class="row">
+                    <div class="col-12">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3179.2646828872807!2d117.1407289737702!3d-0.501312599493774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df67f09ff2917bb%3A0x323ee87fce3f5b0a!2sDinas%20Pariwisata%20Provinsi%20Kalimantan%20Timur!5e1!3m2!1sid!2sid!4v1765467618436!5m2!1sid!2sid" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
                 </div>
-            </div>
+           </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
+

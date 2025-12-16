@@ -21,9 +21,9 @@ class KategoriSerializer(serializers.ModelSerializer):
 class ArtikelSerializer(serializers.ModelSerializer):
     kategori = serializers.PrimaryKeyRelatedField(queryset=Kategori.objects.all())
     author = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    
     kategori_detail = KategoriSerializer(source='kategori', read_only=True)
     author_detail = UserSerializer(source='author', read_only=True)
-
     class Meta:
         model = Artikel
         fields = [

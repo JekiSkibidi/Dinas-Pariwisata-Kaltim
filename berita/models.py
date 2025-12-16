@@ -25,26 +25,31 @@ class Artikel(models.Model):
         config_name='special',
         external_plugin_resources=[(
             'youtube',
-            # 'https://minio.umkt.ac.id/simpelv2-static/ckeditor_plugins/youtube/youtube/', ini punya saya
-            'http://farhandp.my-kelompok05.my.id//static/ckeditor_plugins/youtube/youtube/',
+            'http://localhost:8000/static/ckeditor_plugins/youtube/youtube/',
             'plugin.js',
-            )],
-            blank=True,
-            null=True)
+        )],
+        blank=True,
+        null=True
+    )
+    # ... kode lainnya yang tidak diubah
+    #isi = models.TextField(blank=True, null=True)
     kategori = models.ForeignKey(Kategori, on_delete=models.SET_NULL, blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     thumbnail = models.ImageField(upload_to='artikel', blank=True, null=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(max_length=255, unique=True,blank=True, null=True)
+    created_at = models.TimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.judul
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(f"{x.year}-{x.month}-{x.day}-{self.judul}")
+            self.slug =slugify(f"{x.year}-{x.month}-{x.day}-{self.judul}")
         super(Artikel, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "2.Artikel"
+        verbose_name_plural = "2. Artikel"
+
+
+    
