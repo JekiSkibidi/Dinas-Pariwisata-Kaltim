@@ -92,6 +92,12 @@ DATABASES = {
     )
 }
 
+# Force IPv4 for PostgreSQL connection (Vercel/Lambda compatibility)
+DATABASES['default']['OPTIONS'] = {
+    'connect_timeout': 10,
+    'options': '-c search_path=public',
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
