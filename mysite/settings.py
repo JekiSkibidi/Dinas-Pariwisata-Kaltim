@@ -85,11 +85,18 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 import dj_database_url
+import socket
 
-# Supabase with pgbouncer session mode (port 6543)
+# Force IPv4 resolution for Supabase (Vercel doesn't support IPv6)
+original_getaddrinfo = socket.getaddrinfo
+def getaddrinfo_ipv4_only(host, port, family=0, type=0, proto=0, flags=0):
+    return original_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
+socket.getaddrinfo = getaddrinfo_ipv4_only
+
+# Supabase with pgbouncer port 6543
 DATABASE_URL = config(
     'DATABASE_URL',
-    default='postgresql://postgres:pororo123@db.icmnovjvjhwesqoudtbh.supabase.co:6543/postgres?sslmode=require'
+    default='postgresql://postgres:pororo123@db.icmnovjvjhwesqoudtbh.supabase.co:6543/postgres'
 )
 
 DATABASES = {
@@ -99,6 +106,10 @@ DATABASES = {
 # Serverless-friendly settings
 DATABASES['default']['CONN_MAX_AGE'] = 0
 DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
+DATABASES['default']['OPTIONS'] = {
+    'sslmode': 'require',
+    'connect_timeout': 10,
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
