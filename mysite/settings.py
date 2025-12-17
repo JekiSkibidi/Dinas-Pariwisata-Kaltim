@@ -157,7 +157,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # ==========================================
 AWS_ACCESS_KEY_ID = '3fee672050ffa371604271e7816628c5'
 AWS_SECRET_ACCESS_KEY = '7787b116052c27b1f749a3678a34b1ea6da0fe2bbe8e2cfc083cdffee90f045c'
-AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co'
+AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/s3'
 AWS_STORAGE_BUCKET_NAME = 'media'
 AWS_S3_REGION_NAME = 'ap-southeast-1'
 AWS_S3_FILE_OVERWRITE = False
@@ -165,7 +165,6 @@ AWS_DEFAULT_ACL = None
 AWS_S3_ADDRESSING_STYLE = 'path'  # Required for Supabase
 AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for Supabase
 AWS_QUERYSTRING_AUTH = False  # Public URLs without signature
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL.replace("https://", "")}'
 
 # Django 6.0+ uses STORAGES setting
 STORAGES = {
@@ -176,6 +175,9 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# Media URL pointing to Supabase public URL (not custom domain for now)
+MEDIA_URL = f'{AWS_S3_ENDPOINT_URL.replace("/storage/v1/s3", "/storage/v1/object/public")}/{AWS_STORAGE_BUCKET_NAME}/'
 
 # Media URL pointing to Supabase Storage
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
