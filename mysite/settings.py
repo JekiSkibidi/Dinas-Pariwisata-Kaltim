@@ -161,14 +161,16 @@ AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='46ff80d041bfc35
 AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/s3'
 AWS_STORAGE_BUCKET_NAME = 'media'
 AWS_S3_REGION_NAME = 'ap-southeast-1'  # Standard region for Supabase S3 signature
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = 'public-read'  # Set files as public by default
+AWS_S3_FILE_OVERWRITE = True  # Allow overwrite to bypass exists() check
+AWS_DEFAULT_ACL = None  # Remove ACL (Supabase doesn't support this properly)
 AWS_S3_ADDRESSING_STYLE = 'path'  # Required for Supabase
 AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for Supabase
 AWS_QUERYSTRING_AUTH = False  # Public URLs without signature
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+AWS_S3_VERIFY = True  # Ensure SSL verification
+AWS_S3_USE_SSL = True  # Use HTTPS
 
 # Django 6.0+ uses STORAGES setting
 STORAGES = {
