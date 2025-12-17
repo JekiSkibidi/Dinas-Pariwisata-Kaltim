@@ -38,25 +38,43 @@
 {% endblock content %}
 
 {% block js %}
-<!-- Load CKEditor core first -->
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-<!-- Then load CKEditor init -->
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-<!-- Force initialize CKEditor if not auto-initialized -->
+<!-- CKEditor 4 from CDN (more stable) -->
+<script src="https://cdn.ckeditor.com/4.22.1/standard-all/ckeditor.js"></script>
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        // Find all textareas that should be CKEditor
-        var textareas = document.querySelectorAll('textarea');
-        textareas.forEach(function(textarea) {
-            if (textarea.id && textarea.id.indexOf('id_isi') !== -1) {
-                // Force replace textarea with CKEditor
-                if (typeof CKEDITOR !== 'undefined' && !CKEDITOR.instances[textarea.id]) {
-                    CKEDITOR.replace(textarea.id, {
-                        customConfig: '/static/ckeditor/config.js'
-                    });
-                }
+    // Wait for DOM to be fully loaded
+    window.addEventListener('load', function() {
+        // Destroy any existing instances first
+        if (typeof CKEDITOR !== 'undefined') {
+            for (var instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].destroy(true);
             }
-        });
+            
+            // Find the textarea with id_isi
+            var textarea = document.querySelector('textarea[name="isi"]');
+            if (textarea) {
+                // Replace with CKEditor
+                CKEDITOR.replace(textarea, {
+                    height: 400,
+                    removePlugins: 'image', // Remove conflict plugins
+                    toolbar: [
+                        { name: 'document', items: [ 'Source' ] },
+                        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                        { name: 'editing', items: [ 'Find', 'Replace', '-', 'SelectAll' ] },
+                        '/',
+                        { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
+                        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                        { name: 'links', items: [ 'Link', 'Unlink' ] },
+                        '/',
+                        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                        { name: 'tools', items: [ 'Maximize' ] }
+                    ]
+                });
+                console.log('CKEditor initialized successfully');
+            } else {
+                console.error('Textarea not found');
+            }
+        }
     });
 </script>
 {% endblock %}

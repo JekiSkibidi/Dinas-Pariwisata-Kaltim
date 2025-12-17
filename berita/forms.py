@@ -1,7 +1,6 @@
 from django import forms
 from berita.models import Artikel
 from django.contrib.auth.models import User
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class ArtikelForm(forms.ModelForm):
 
@@ -15,10 +14,12 @@ class ArtikelForm(forms.ModelForm):
                     'class': 'form-control',
                 }),
         
-            # Use CKEditor widget instead of plain Textarea
-            "isi" : CKEditorUploadingWidget(
-                config_name='special',
-            ),
+            # Use plain Textarea - CKEditor will be initialized by CDN script
+            "isi" : forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 10,
+                }),
 
             "kategori" : forms.Select(
                 attrs={
