@@ -1,16 +1,27 @@
 from django.urls import path, include
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 from mysite.views import home, about, detail_artikel, contact, submit_contact
 from mysite.authentikasi import akun_login, akun_logout, akun_registrasi
+from mysite.sitemaps import StaticViewSitemap, ArtikelSitemap
+from mysite.robots import robots_txt
 
 from berita.api import *
 
+sitemaps = {
+    'static': StaticViewSitemap,
+    'artikel': ArtikelSitemap,
+}
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    path('robots.txt', robots_txt, name='robots_txt'),
     
     path('', home, name="home"),
     path('about', about, name="about"),
