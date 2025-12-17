@@ -1,0 +1,16 @@
+# Exclude large files and folders from Lambda function
+staticfiles/
+media/
+*.pyc
+__pycache__/
+*.sqlite3
+*.db
+.env
+.git/
+.vscode/
+*.md
+tests/
+*.log
+*.pot
+*.mo
+node_modules/
