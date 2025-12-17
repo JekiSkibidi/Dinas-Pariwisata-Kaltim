@@ -38,6 +38,25 @@
 {% endblock content %}
 
 {% block js %}
-<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<!-- Load CKEditor core first -->
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<!-- Then load CKEditor init -->
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<!-- Force initialize CKEditor if not auto-initialized -->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find all textareas that should be CKEditor
+        var textareas = document.querySelectorAll('textarea');
+        textareas.forEach(function(textarea) {
+            if (textarea.id && textarea.id.indexOf('id_isi') !== -1) {
+                // Force replace textarea with CKEditor
+                if (typeof CKEDITOR !== 'undefined' && !CKEDITOR.instances[textarea.id]) {
+                    CKEDITOR.replace(textarea.id, {
+                        customConfig: '/static/ckeditor/config.js'
+                    });
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
