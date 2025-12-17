@@ -173,6 +173,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_S3_VERIFY = True  # Ensure SSL verification
 AWS_S3_USE_SSL = True  # Use HTTPS
+# CRITICAL: Set custom domain for public URL generation
+AWS_S3_CUSTOM_DOMAIN = 'icmnovjvjhwesqoudtbh.supabase.co/storage/v1/object/public/media'
 
 # Django 6.0+ uses STORAGES setting
 STORAGES = {
