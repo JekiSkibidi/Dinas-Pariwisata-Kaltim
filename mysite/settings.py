@@ -87,21 +87,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL'),
-        conn_max_age=0,  # Disable connection pooling for serverless
+        conn_max_age=0,
         conn_health_checks=False,
-        ssl_require=False,
     )
 }
-
-# Force IPv4 and optimize for serverless/Vercel
-if DATABASES['default'].get('ENGINE') == 'django.db.backends.postgresql':
-    DATABASES['default']['OPTIONS'] = {
-        'connect_timeout': 10,
-        'keepalives': 1,
-        'keepalives_idle': 30,
-        'keepalives_interval': 10,
-        'keepalives_count': 5,
-    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
