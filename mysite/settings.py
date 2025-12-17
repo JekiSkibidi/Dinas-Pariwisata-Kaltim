@@ -176,11 +176,8 @@ STORAGES = {
     },
 }
 
-# Media URL pointing to Supabase public URL (not custom domain for now)
-MEDIA_URL = f'{AWS_S3_ENDPOINT_URL.replace("/storage/v1/s3", "/storage/v1/object/public")}/{AWS_STORAGE_BUCKET_NAME}/'
-
-# Media URL pointing to Supabase Storage
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+# Media URL pointing to Supabase public URL
+MEDIA_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/object/public/media/'
 
 LOGIN_REDIRECT_URL = '/authentikasi/login'
 LOGOUT_REDIRECT_URL = '/'
