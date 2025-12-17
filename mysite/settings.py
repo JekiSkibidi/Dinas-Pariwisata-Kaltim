@@ -158,8 +158,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # ==========================================
 # IMPORTANT: Use S3 Access Keys from Supabase Dashboard -> Settings -> Storage -> S3 Access Keys
 # MUST set these in Vercel Environment Variables for production
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '7d5275698066e979fc582541620db3e7')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'b67813813a82b3efbde2e32331fb1f64a87887e34dc21e55bf1200347556d8ee')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'f3291eef66132dd09892d510a908251a')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '006cf01a623d4454f8b1692d6201dc207615f716ffd99ee0f496abe42508c8e3')
 # CRITICAL: Remove '.storage' subdomain - use main project domain
 AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.supabase.co/storage/v1/s3'
 AWS_STORAGE_BUCKET_NAME = 'media'  # Bucket name is case-sensitive (lowercase)
