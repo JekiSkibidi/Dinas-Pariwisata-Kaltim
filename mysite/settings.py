@@ -156,10 +156,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # SUPABASE STORAGE (MEDIA FILES)
 # ==========================================
 # IMPORTANT: Use NEW S3 Access Keys from Supabase Dashboard -> Settings -> Storage -> S3 Access Keys
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='3f810af6f4e1176f7c6b00e48bd4c725')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='46ff80d041bfc3593ad71881b9c7ad4d8b8b4a685850d9ad6d53658fd451e49d')
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='7d5275698066e979fc582541620db3e7')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='b67813813a82b3efbde2e32331fb1f64a87887e34dc21e55bf1200347556d8ee')
 AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/s3'
-AWS_STORAGE_BUCKET_NAME = 'media'
+AWS_STORAGE_BUCKET_NAME = 'Media'  # Bucket name is case-sensitive
 AWS_S3_REGION_NAME = 'ap-northeast-1'  # Tokyo region (matches database location)
 AWS_S3_FILE_OVERWRITE = True  # Allow overwrite to bypass exists() check
 AWS_DEFAULT_ACL = None  # Remove ACL (Supabase doesn't support this properly)
@@ -183,7 +183,7 @@ STORAGES = {
 }
 
 # Media URL pointing to Supabase public URL
-MEDIA_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/object/public/media/'
+MEDIA_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/object/public/Media/'
 
 LOGIN_REDIRECT_URL = '/authentikasi/login'
 LOGOUT_REDIRECT_URL = '/'
