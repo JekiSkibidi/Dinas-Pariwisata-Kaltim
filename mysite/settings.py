@@ -86,19 +86,19 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 import dj_database_url
 
-# Use Supabase IPv4 pooler (Transaction mode) for Vercel compatibility
-# Port 6543 = Transaction mode (required for Django migrations)
+# Supabase with pgbouncer session mode (port 6543)
 DATABASE_URL = config(
-    'DATABASE_URL', 
-    default='postgresql://postgres.icmnovjvjhwesqoudtbh:pororo123@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres'
+    'DATABASE_URL',
+    default='postgresql://postgres:pororo123@db.icmnovjvjhwesqoudtbh.supabase.co:6543/postgres?sslmode=require'
 )
 
 DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL, conn_max_age=0)
 }
 
-# Disable persistent connections for serverless
+# Serverless-friendly settings
 DATABASES['default']['CONN_MAX_AGE'] = 0
+DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
