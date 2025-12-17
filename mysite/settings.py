@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 import dj_database_url
 
-# Supabase direct connection (port 5432) - most stable for Vercel
+# Supabase Transaction Pooler (port 6543) - IPv4 compatible for Vercel
 DATABASE_URL = config(
     'DATABASE_URL',
-    default='postgresql://postgres:pororo123@db.icmnovjvjhwesqoudtbh.supabase.co:5432/postgres'
+    default='postgresql://postgres.icmnovjvjhwesqoudtbh:pororo123@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres'
 )
 
 DATABASES = {
