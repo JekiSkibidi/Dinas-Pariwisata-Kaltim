@@ -29,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,.vercel.app').split(',')
 
 
 # Application definition
@@ -87,16 +87,21 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL'),
-        conn_max_age=600,
-        conn_health_checks=True,
+        conn_max_age=0,  # Disable connection pooling for serverless
+        conn_health_checks=False,
+        ssl_require=False,
     )
 }
 
-# Force IPv4 for PostgreSQL connection (Vercel/Lambda compatibility)
-DATABASES['default']['OPTIONS'] = {
-    'connect_timeout': 10,
-    'options': '-c search_path=public',
-}
+# Force IPv4 and optimize for serverless/Vercel
+if DATABASES['default'].get('ENGINE') == 'django.db.backends.postgresql':
+    DATABASES['default']['OPTIONS'] = {
+        'connect_timeout': 10,
+        'keepalives': 1,
+        'keepalives_idle': 30,
+        'keepalives_interval': 10,
+        'keepalives_count': 5,
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -232,3 +237,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 # end ckeditor config 
+# Vercel Production Settings
+if config('ON_SERVER', default=False, cast=bool):
+    DEBUG = False
+    ALLOWED_HOSTS = ['*']  # Vercel handles host validation
+    
+    # Security settings for production
+    SECURE_SSL_REDIRECT = False  # Vercel handles SSL
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
