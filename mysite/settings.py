@@ -162,6 +162,9 @@ AWS_STORAGE_BUCKET_NAME = 'media'
 AWS_S3_REGION_NAME = 'ap-southeast-1'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
+AWS_S3_ADDRESSING_STYLE = 'path'  # Required for Supabase
+AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for Supabase
+AWS_QUERYSTRING_AUTH = False  # Public URLs without signature
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL.replace("https://", "")}'
 
 # Django 6.0+ uses STORAGES setting
