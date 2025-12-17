@@ -160,7 +160,7 @@ AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='3f810af6f4e1176f7c6b00e
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='46ff80d041bfc3593ad71881b9c7ad4d8b8b4a685850d9ad6d53658fd451e49d')
 AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/s3'
 AWS_STORAGE_BUCKET_NAME = 'media'
-AWS_S3_REGION_NAME = 'ap-southeast-1'  # Standard region for Supabase S3 signature
+AWS_S3_REGION_NAME = 'ap-northeast-1'  # Tokyo region (matches database location)
 AWS_S3_FILE_OVERWRITE = True  # Allow overwrite to bypass exists() check
 AWS_DEFAULT_ACL = None  # Remove ACL (Supabase doesn't support this properly)
 AWS_S3_ADDRESSING_STYLE = 'path'  # Required for Supabase
