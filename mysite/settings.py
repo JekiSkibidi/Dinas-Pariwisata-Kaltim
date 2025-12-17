@@ -184,8 +184,8 @@ STORAGES = {
     },
 }
 
-# Media URL for public access - MUST use .storage subdomain for public URLs
-MEDIA_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/object/public/media/'
+# Media URL for public access - Use main domain (NOT .storage subdomain)
+MEDIA_URL = 'https://icmnovjvjhwesqoudtbh.supabase.co/storage/v1/object/public/media/'
 
 LOGIN_REDIRECT_URL = '/authentikasi/login'
 LOGOUT_REDIRECT_URL = '/'
