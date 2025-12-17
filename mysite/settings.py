@@ -26,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-temporary-key-change-this')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default='True', cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,.vercel.app').split(',')
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,12 +84,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+import dj_database_url
+
+DATABASE_URL = config('DATABASE_URL', default='postgresql://postgres:pororo123@db.icmnovjvjhwesqoudtbh.supabase.co:5432/postgres')
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL'),
-        conn_max_age=0,
-        conn_health_checks=False,
-    )
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=0)
 }
 
 # Password validation
@@ -227,13 +227,10 @@ CKEDITOR_CONFIGS = {
 }
 # end ckeditor config 
 # Vercel Production Settings
-if config('ON_SERVER', default=False, cast=bool):
-    DEBUG = False
-    ALLOWED_HOSTS = ['*']  # Vercel handles host validation
-    
-    # Security settings for production
-    SECURE_SSL_REDIRECT = False  # Vercel handles SSL
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
+# Vercel/Production compatibility
+SECURE_SSL_REDIRECT = False
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+    'https://dinas-pariwisata-kaltim.vercel.app',
+    'https://dinas-pariwisata-kaltim-7yp3kr505-jekiskibidis-projects.vercel.app'
+]
