@@ -162,7 +162,7 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'b67813813a82b3e
 # CRITICAL: Remove '.storage' subdomain - use main project domain
 AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.supabase.co/storage/v1/s3'
 AWS_STORAGE_BUCKET_NAME = 'media'  # Bucket name is case-sensitive (lowercase)
-AWS_S3_REGION_NAME = 'ap-southeast-1'  # Singapore region (verify in Supabase dashboard)
+AWS_S3_REGION_NAME = 'ap-northeast-1'  # Tokyo region (same as database)
 AWS_S3_FILE_OVERWRITE = True  # Allow overwrite to bypass exists() check
 AWS_DEFAULT_ACL = None  # Remove ACL (Supabase doesn't support this properly)
 AWS_S3_ADDRESSING_STYLE = 'path'  # CRITICAL: Force path style for Supabase (not virtual)
