@@ -155,16 +155,20 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # ==========================================
 # SUPABASE STORAGE (MEDIA FILES)
 # ==========================================
-AWS_ACCESS_KEY_ID = '3fee672050ffa371604271e7816628c5'
-AWS_SECRET_ACCESS_KEY = '7787b116052c27b1f749a3678a34b1ea6da0fe2bbe8e2cfc083cdffee90f045c'
+# IMPORTANT: Use credentials from Supabase Dashboard -> Settings -> Storage -> S3 Connection
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='3fee672050ffa371604271e7816628c5')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='7787b116052c27b1f749a3678a34b1ea6da0fe2bbe8e2cfc083cdffee90f045c')
 AWS_S3_ENDPOINT_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/s3'
 AWS_STORAGE_BUCKET_NAME = 'media'
-AWS_S3_REGION_NAME = 'ap-southeast-1'
+AWS_S3_REGION_NAME = 'ap-northeast-1'  # Tokyo region (must match Supabase server location)
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
+AWS_DEFAULT_ACL = 'public-read'  # Set files as public by default
 AWS_S3_ADDRESSING_STYLE = 'path'  # Required for Supabase
 AWS_S3_SIGNATURE_VERSION = 's3v4'  # Required for Supabase
 AWS_QUERYSTRING_AUTH = False  # Public URLs without signature
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 
 # Django 6.0+ uses STORAGES setting
 STORAGES = {
