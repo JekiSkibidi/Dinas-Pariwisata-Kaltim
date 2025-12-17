@@ -184,8 +184,8 @@ STORAGES = {
     },
 }
 
-# Media URL pointing to Supabase public URL (lowercase bucket name)
-MEDIA_URL = 'https://icmnovjvjhwesqoudtbh.storage.supabase.co/storage/v1/object/public/media/'
+# Media URL pointing to Supabase public URL - MUST match endpoint (without .storage)
+MEDIA_URL = 'https://icmnovjvjhwesqoudtbh.supabase.co/storage/v1/object/public/media/'
 
 LOGIN_REDIRECT_URL = '/authentikasi/login'
 LOGOUT_REDIRECT_URL = '/'
