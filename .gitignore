@@ -1,4 +1,4 @@
-mysite/_pycache_/*
+﻿mysite/_pycache_/*
 
 berita/migrations/*
 berita/_pycache_/*
@@ -8,18 +8,32 @@ pengguna/_pycache_/*
 
 .DS_Store
 
-# Environment variables (rahasia)
+# Environment files
 .env
+.env.local
+.env copy
 
-# Python cache
-__pycache__
-*.pyc
-*.pyo
-
-# Database lokal
-db.sqlite3
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
 
 # Virtual environment
 env/
-env_new/
 venv/
+ENV/
+env_new/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
+
+# Backup files
+*.json.bak
+backup_mysql_lokal.json
+data_backup*.json
+data_clean.json
